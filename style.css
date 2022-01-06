@@ -1,0 +1,319 @@
+/** RESET **/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+/** FONTS **/
+@font-face {
+    font-family: "Digital Dismay";
+    src: url("/fonts/digital_dismay.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Monument Extended";
+    src: url("/fonts/MonumentExtended-Regular.woff2") format("woff2");
+}
+
+/** GENERAL **/
+:root {
+    font-size: 15px;
+
+    --color-blue-400: #2B80B3;
+    --color-blue-500: #066AA5;
+    --color-blue-600: #055A8C;
+    --color-blue-700: #044A74;
+    --color-blue-800: #043C5E;
+    --color-red-400: #D63B51;
+    --color-red-500: #CF1932;
+    --color-red-600: #B0152A;
+    --color-grey-100: #FFFFFF;
+    --color-grey-200: #EFEFF1;
+    --color-grey-300: #D0D0D2;
+    --color-green-300: #9AB8AA;
+    --color-green-400: #768986;
+    --color-green-500: #596664;
+    --color-green-600: #38564F;
+    --color-green-700: #143624;
+    --color-black: #000000;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.calculator {
+    width: 25rem;
+    background: var(--color-blue-500);
+    background: linear-gradient(180deg, var(--color-blue-500) 0%, var(--color-blue-600) 100%);
+    border-radius: .5rem .5rem 1.7rem 1.7rem;
+    border-top: .2rem solid var(--color-blue-400);
+    border-bottom: .4rem solid var(--color-blue-700);
+    border-left: .2rem solid var(--color-blue-700);
+    border-right: .2rem solid var(--color-blue-700);
+    box-shadow: 0 1.5rem 1.5rem -.4rem rgba(0, 0, 0, .4);
+}
+
+/** DISPLAY **/
+.display {
+    display: flex;
+    margin-top: 2rem;
+    border-top: .15rem solid var(--color-blue-700);
+    border-bottom: .12rem solid var(--color-blue-400);
+    pointer-events: none;
+}
+
+.display>.side {
+    width: 2.5rem;
+}
+
+.display>.screen {
+    position: relative;
+    flex: 1;
+    background-color: var(--color-green-500);
+    overflow: hidden;
+    border-top: .25rem solid var(--color-blue-700);
+    border-right: .25rem solid var(--color-blue-800);
+    border-left: .25rem solid var(--color-blue-800);
+    border-bottom: .25rem solid var(--color-blue-400);
+    box-shadow: inset 0 .2rem .3rem rgba(0, 0, 0, .4);
+}
+
+.display>.screen>.numbers {
+    margin: .5rem;
+    padding-top: .4rem;
+    background-color: var(--color-green-300);
+    border-radius: .3rem;
+    box-shadow: inset 0 .15rem .25rem .1rem rgba(0, 0, 0, .55);
+    font-family: "Digital Dismay";
+    font-size: 3em;
+    letter-spacing: .3rem;
+    line-height: 2.5rem;
+    text-align: right;
+    color: var(--color-green-700);
+}
+
+.display>.screen>.numbers>div {
+    transform: skew(-4deg, 0);
+}
+
+.display>.screen>.numbers::selection {
+    color: none;
+    background: none;
+}
+
+.display>.screen>.flare {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, .28) 80%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+/** FLARE LINE **/
+.flare-line {
+    position: relative;
+    top: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .25) 20%, rgba(255, 255, 255, 0) 100%);
+}
+
+/** MIDDLE **/
+.middle {
+    padding: 1rem 1rem;
+}
+
+.middle>.brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.middle>.brand>svg {
+    opacity: 90%;
+    fill: var(--color-grey-100);
+}
+
+.middle>.brand>svg.brand-name {
+    margin-top: -.04rem;
+    width: 12rem;
+}
+
+.middle>.brand>svg.model-name {
+    width: 9rem;
+}
+
+.middle>.brand>.brand-name::selection {
+    color: none;
+    background: none;
+}
+
+.middle>.brand>.model-name::selection {
+    color: none;
+    background: none;
+}
+
+.middle>.solar-panel {
+    margin-top: .3rem;
+    display: flex;
+    background-color: var(--color-green-700);
+    box-shadow: inset 0 .1rem .2rem rgba(0, 0, 0, 0.7);
+    border: .1rem solid var(--color-black);
+    border-radius: .2rem;
+    width: 10rem;
+    overflow: hidden;
+}
+
+.middle>.solar-panel>.panel {
+    flex: 1;
+    height: 2.5rem;
+    border-right: .15rem solid rgba(0, 0, 0, 0.3);
+}
+
+.middle>.solar-panel>.panel:last-child {
+    border-right: none;
+}
+
+/** SEPARATOR **/
+.separator {
+    border-top: .15rem solid var(--color-blue-700);
+    border-bottom: .12rem solid var(--color-blue-400);
+}
+
+/** BUTTONS **/
+.buttons {
+    margin: 1rem .8rem;
+    padding: .1rem .2rem;
+    background: var(--color-blue-600);
+    background: linear-gradient(180deg, var(--color-blue-600) 0%, var(--color-blue-700) 100%);
+    border-radius: .5rem;
+    border-top: .15rem solid var(--color-blue-700);
+    border-bottom: .12rem solid var(--color-blue-500);
+}
+
+.buttons>.wrapper {
+    display: flex;
+    padding: .5rem;
+    background: var(--color-blue-500);
+    background: linear-gradient(180deg, var(--color-blue-500) 0%, var(--color-blue-600) 100%);
+    border-radius: .3rem;
+    border-bottom: .15rem solid var(--color-blue-800);
+    border-top: .12rem solid var(--color-blue-400);
+}
+
+.buttons .numbers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.buttons .operators {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.buttons .button {
+    margin-bottom: .2rem;
+    padding: .3rem;
+    background-color: rgba(0, 0, 0, .15);
+    background: linear-gradient(180deg, rgba(0, 0, 0, .3) 0%, rgba(0, 0, 0, .15) 85%, rgba(255, 255, 255, .2) 100%);
+    border-radius: .3rem;
+}
+
+.buttons .button>div {
+    position: relative;
+    border-radius: .2rem;
+    padding-bottom: .1rem;
+}
+
+.buttons .button button {
+    position: relative;
+    top: -2px;
+    display: flex;
+    padding: 0rem .4rem;
+    width: 4rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: .2rem;
+    font-family: 'Monument Extended', sans-serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.buttons .button button:active {
+    top: 0px;
+}
+
+.buttons .button.white>div {
+    background-color: var(--color-grey-300);
+    box-shadow: 0 .35rem .5rem -.1rem rgba(0, 0, 0, .7);
+}
+
+.buttons .button.white>div:active {
+    box-shadow: 0 .25rem .5rem -.1rem rgba(0, 0, 0, .7);
+}
+
+.buttons .button.white button {
+    background-color: var(--color-grey-200);
+    border-top: .1rem solid var(--color-grey-100);
+    color: var(--color-blue-800);
+}
+
+.buttons .button.red>div {
+    background-color: var(--color-red-600);
+    box-shadow: 0 .35rem .5rem -.1rem rgba(0, 0, 0, .7);
+}
+
+.buttons .button.red>div:active {
+    box-shadow: 0 .25rem .5rem -.1rem rgba(0, 0, 0, .7);
+}
+
+.buttons .button.red button {
+    background-color: var(--color-red-500);
+    border-top: .1rem solid var(--color-red-400);
+    color: var(--color-grey-100);
+}
