@@ -13,13 +13,14 @@ const equalButton = document.querySelector('#equal');
 const commaButton = document.querySelector('#comma');
 
 function updateDisplay() {
-    /* limit number length to 8 */
+    /* limit decimal length to 8 */
     let isDecimal = currentValue.includes('.');
     let integerLength = (isDecimal) ? currentValue.slice(0, currentValue.indexOf('.')).length : currentValue.length;
     let decimalLength = 8 - integerLength;
     let number = parseFloat(parseFloat(currentValue.join('')).toFixed(decimalLength));
 
     let display = number.toString();
+    display = (currentValue.at(-1) == '.') ? display + '.' : display; /* add comma at the end */
     display = display.replace('.', '<span class="comma">.</span>'); /* add class to comma so it takes less width */
 
     screen.innerHTML = display;
@@ -88,3 +89,5 @@ additionButton.addEventListener('mousedown', () => newOperation((a, b) => a + b)
 substractionButton.addEventListener('mousedown', () => newOperation((a, b) => a - b));
 multiplicationButton.addEventListener('mousedown', () => newOperation((a, b) => a * b));
 divisionButton.addEventListener('mousedown', () => newOperation((a, b) => a / b));
+
+updateDisplay();
