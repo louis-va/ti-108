@@ -46,8 +46,8 @@ h6 {
 
 /** FONTS **/
 @font-face {
-    font-family: "Digital Dismay";
-    src: url("/fonts/digital_dismay.otf") format("opentype");
+    font-family: "Digital 7";
+    src: url("/fonts/digital-7.ttf") format("truetype");
 }
 
 @font-face {
@@ -76,6 +76,12 @@ h6 {
     --color-green-600: #38564F;
     --color-green-700: #143624;
     --color-black: #000000;
+}
+
+@media screen and (max-width: 450px) {
+    :root {
+        font-size: 3.3vw;
+    }
 }
 
 .main {
@@ -128,7 +134,7 @@ h6 {
     background-color: var(--color-green-300);
     border-radius: .3rem;
     box-shadow: inset 0 .15rem .25rem .1rem rgba(0, 0, 0, .55);
-    font-family: "Digital Dismay";
+    font-family: "Digital 7";
     font-size: 3.5em;
     letter-spacing: .3rem;
     line-height: 2.9rem;
@@ -140,7 +146,7 @@ h6 {
     transform: skew(-4deg, 0);
 }
 
-.display>.screen>.numbers::selection {
+.display>.screen>.numbers>div::selection {
     color: none;
     background: none;
 }
@@ -274,7 +280,7 @@ h6 {
 
 .buttons .button button {
     position: relative;
-    top: -2px;
+    top: -.1rem;
     display: flex;
     padding: 0rem .4rem;
     width: 4rem;
@@ -287,7 +293,7 @@ h6 {
 }
 
 .buttons .button button:active {
-    top: 0px;
+    top: 0rem;
 }
 
 .buttons .button.white>div {
