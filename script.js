@@ -11,13 +11,25 @@ const multiplicationButton = document.querySelector('#multiplication');
 const divisionButton = document.querySelector('#division');
 const equalButton = document.querySelector('#equal');
 const commaButton = document.querySelector('#comma');
+const errorIndicator = document.querySelector('#error');
 
 function updateDisplay() {
-    /* limit decimal length to 8 */
+    /* limit number length to 8 */
     let isDecimal = currentValue.includes('.');
+    let maxIntegerLength = (isDecimal) ? 7 : 8;
     let integerLength = (isDecimal) ? currentValue.slice(0, currentValue.indexOf('.')).length : currentValue.length;
     let decimalLength = 8 - integerLength;
-    let number = parseFloat(parseFloat(currentValue.join('')).toFixed(decimalLength));
+
+    let number;
+    if(integerLength <= maxIntegerLength) {
+        number = parseFloat(parseFloat(currentValue.join('')).toFixed(decimalLength));
+    } else {
+        let overflowArray = currentValue.filter(n => n != '.');
+        overflowArray.splice(1, 0, '.');
+        overflowArray = overflowArray.slice(0, 9);
+        number = parseFloat(parseFloat(overflowArray.join('')).toFixed(7));
+        overflow();
+    }
 
     let display = number.toString();
     display = (currentValue.at(-1) == '.') ? display + '.' : display; /* add comma at the end */
@@ -26,7 +38,14 @@ function updateDisplay() {
     screen.innerHTML = display;
 }
 
+function overflow() {
+    errorIndicator.classList.toggle('hidden');
+    currentValue = [];
+    previousValue = [];
+}
+
 function inputNumber(value) {
+    if(!errorIndicator.classList.contains('hidden')) errorIndicator.classList.toggle('hidden');
     if (!operator) previousValue = [];
 
     /* not more than 8 numbers and not multiple 0 at the beginning */
@@ -48,6 +67,7 @@ function clear() {
     currentValue = [0];
     previousValue = [];
     operator = undefined;
+    if(!errorIndicator.classList.contains('hidden')) errorIndicator.classList.toggle('hidden');
     updateDisplay();
 }
 
@@ -69,12 +89,12 @@ function newOperation(ope) {
     /* execute the pending operation if there is one */
     if (operator && currentValue.length != 0) {
         executeOperation();
+        operator = ope;
     } else if (currentValue.length != 0) {
         previousValue = currentValue;
         currentValue = [];
+        operator = ope;
     }
-
-    operator = ope;
 }
 
 numberButtons.forEach((btn) => {
