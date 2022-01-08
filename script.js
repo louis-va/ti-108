@@ -32,7 +32,7 @@ function updateDisplay() {
 
     /* display number on the screen */
     let display = number.toString();
-    display = (currentValue.at(-1) == '.') ? display + '.' : display; /* add comma at the end */
+    display = (currentValue[currentValue.length-1] == '.') ? display + '.' : display; /* add comma at the end */
     display = display.replace('.', '<span class="comma">.</span>'); /* add class to comma so it takes less width */
     screen.innerHTML = display;
     flicker();
