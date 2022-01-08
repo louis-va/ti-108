@@ -15,12 +15,11 @@ const errorIndicator = document.querySelector('#error');
 
 function updateDisplay() {
     /* limit number length to 8 */
+    let number;
     let isDecimal = currentValue.includes('.');
     let maxIntegerLength = (isDecimal) ? 7 : 8;
     let integerLength = (isDecimal) ? currentValue.slice(0, currentValue.indexOf('.')).length : currentValue.length;
     let decimalLength = 8 - integerLength;
-
-    let number;
     if(integerLength <= maxIntegerLength) {
         number = parseFloat(parseFloat(currentValue.join('')).toFixed(decimalLength));
     } else {
@@ -31,11 +30,17 @@ function updateDisplay() {
         overflow();
     }
 
+    /* display number on the screen */
     let display = number.toString();
     display = (currentValue.at(-1) == '.') ? display + '.' : display; /* add comma at the end */
     display = display.replace('.', '<span class="comma">.</span>'); /* add class to comma so it takes less width */
-
     screen.innerHTML = display;
+    flicker();
+}
+
+function flicker() {
+    screen.style.opacity = '0%';
+    setTimeout(() => screen.style.opacity = '100%', 25);
 }
 
 function overflow() {
