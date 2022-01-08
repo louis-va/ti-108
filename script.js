@@ -99,7 +99,7 @@ function newOperation(ope) {
         currentValue = [];
     }
 
-    operator = ope;
+    if(currentValue.length != 0 || previousValue != 0) operator = ope;
 }
 
 numberButtons.forEach((btn) => {
