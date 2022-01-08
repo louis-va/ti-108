@@ -89,12 +89,12 @@ function newOperation(ope) {
     /* execute the pending operation if there is one */
     if (operator && currentValue.length != 0) {
         executeOperation();
-        operator = ope;
     } else if (currentValue.length != 0) {
         previousValue = currentValue;
         currentValue = [];
-        operator = ope;
     }
+
+    operator = ope;
 }
 
 numberButtons.forEach((btn) => {
